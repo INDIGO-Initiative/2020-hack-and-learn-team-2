@@ -12,7 +12,7 @@ with open('sankey.csv') as csvfile:
      next(reader)
      # get data
      for row in reader:
-        if row[0].strip() and row[6].strip() and row[19].strip() and row[19].strip().startswith('GOAL'):
+        if row[0].strip() and row[6].strip() and row[19].strip() and row[19].strip().startswith('GOAL') and row[20].strip():
             item = {
                 'project_id': row[0].strip(),
                 'outcome_id': row[6].strip(),
@@ -49,9 +49,9 @@ class SankeyData:
 
 sankey_data = SankeyData()
 for d in data:
-    sankey_data.add(d['project_id'], d['primary_goal'])
-    if d['primary_target']:
-        sankey_data.add(d['primary_goal'], d['primary_target'])
+
+    sankey_data.add(d['primary_goal'], d['primary_target'])
+    sankey_data.add(d['primary_target'], d['project_id'])
 
 #----------------------- Output data
 
